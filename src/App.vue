@@ -1,28 +1,84 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <main class="container">
+    <div class="column-right">
+      <Products></Products>
+    </div>
+  </main>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Products from "./components/Products.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    Products,
+  },
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+
+*,
+:after,
+:before {
+  box-sizing: border-box;
 }
+
+body,
+html {
+  height: 100%;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #222222;
+  background: #ffffff;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 768px;
+    padding: 0 9px;
+  }
+}
+
+@media (min-width: 1250px) {
+  .container {
+    width: 1250px;
+    padding: 0 40px;
+  }
+}
+
+.column-right {
+  width: 100%;
+  margin: 20px 0 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 1000px) {
+  .column-right {
+    width:750px
+  }
+}
+
+@media (min-width: 1250px) {
+  .column-right {
+    width: 1000px;
+  }
+}
+
 </style>
