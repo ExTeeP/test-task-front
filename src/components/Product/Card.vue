@@ -2,7 +2,7 @@
   <div class="product">
     <header class="product__header">
       <span class="product__code">Код: 147268</span>
-      <span class="product_status">Наличие</span>
+      <span class="product__status">Наличие</span>
       <div class="product__photo">
         <a href="#" class="product__link">
           <img src="@/assets/df126-52f2-11e5-b9a9-00259036a192_220x220_1.jpg">
@@ -11,21 +11,21 @@
     </header>
 
     <div class="product__body">
-      <h4 class="product__title">
-        <a href="#" class="product__link"
-          >Ламинат 31 кл Kronospan Kronofix Афцелия Малайская 2,47 м.кв. 7 мм</a
-        >
-      </h4>
+      <div class="product__inner">
+        <h4 class="product__title">
+          <a href="#" class="product__link"
+            >Ламинат 31 кл Kronospan Kronofix Афцелия Малайская 2,47 м.кв. 7 мм</a
+          >
+        </h4>
 
-      <Tags class="product__tags"></Tags>
-
-      <Units class="product__units"></Units>
+        <Tags class="product__tags"></Tags>
+      </div>
 
       <div class="product__price">
-        <p class="product__price-discount">
+        <div class="product__discount">
           <span class="product__discount-text">По карте<br />клуба</span>
-          <span class="product__discount-price">375,71</span>
-          <span class="rouble__i black__i">
+          <span class="product__discount-price">375,71 &#8381;</span>
+          <!-- <span class="rouble__i black__i">
             <svg
               version="1.0"
               id="rouble__b"
@@ -43,12 +43,12 @@
                 xlink:href="#rouble_black"
               ></use>
             </svg>
-          </span>
-        </p>
+          </span> -->
+        </div>
 
-        <p class="product__price-retail">
-          <span class="product__retail-price">391,09</span>
-          <span class="rouble__i black__i">
+        <div class="product__retail">
+          <span class="product__retail-price">391,09 &#8381;</span>
+          <!-- <span class="rouble__i black__i">
             <svg
               version="1.0"
               id="rouble__g"
@@ -66,12 +66,14 @@
                 xlink:href="#rouble_gray"
               ></use>
             </svg>
-          </span>
-        </p>
+          </span> -->
+        </div>
 
         <div class="product__price-points">
           <p class="product__points">Можно купить за 231,75 балла</p>
         </div>
+
+        <Units class="product__units"></Units>
       </div>
     </div>
 
@@ -81,22 +83,7 @@
       <div class="product__footer-wrapper">
         <Stepper class="product__stepper"></Stepper>
 
-        <button
-          class="product__button button"
-          type="button"
-          data-url="/cart/"
-          data-product-id="9bf0afd7-5190-11e5-b9a9-00259036a192"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 512 512"
-            width="20"
-            height="20"
-          >
-            <path
-              d="M508.764 74.466a14.77 14.77 0 00-11.533-5.542H104.152L93.16 21.294A14.77 14.77 0 0078.769 9.846h-64C6.613 9.846 0 16.459 0 24.616s6.613 14.769 14.769 14.769H67.02l74.612 323.321a14.77 14.77 0 0014.391 11.448h295.915c8.157 0 14.769-6.613 14.769-14.769 0-8.157-6.613-14.769-14.769-14.769H167.773l-11.36-49.231h296.511a14.769 14.769 0 0014.409-11.527L511.64 86.935a14.77 14.77 0 00-2.876-12.469zm-67.656 191.38H149.596L110.969 98.462h367.8l-37.661 167.384zM216.615 393.846c-29.86 0-54.154 24.293-54.154 54.154s24.293 54.154 54.154 54.154c29.86 0 54.154-24.293 54.154-54.154s-24.293-54.154-54.154-54.154zm0 78.77C203.042 472.616 192 461.573 192 448s11.042-24.615 24.615-24.615c13.573 0 24.615 11.042 24.615 24.615s-11.042 24.616-24.615 24.616zM393.846 393.846c-29.86 0-54.154 24.293-54.154 54.154s24.293 54.154 54.154 54.154c29.86 0 54.154-24.293 54.154-54.154s-24.293-54.154-54.154-54.154zm0 78.77c-13.573 0-24.615-11.042-24.615-24.615s11.042-24.615 24.615-24.615c13.573 0 24.615 11.042 24.615 24.615s-11.042 24.615-24.615 24.615z"
-            />
-          </svg>
+        <button class="product__button button" type="button">
           <span class="product__button-text">В корзину</span>
         </button>
       </div>
@@ -122,12 +109,13 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 .product {
   width: 240px;
   height: 545px;
-  padding: 10px 10px 18px;
+  padding: 10px 9px 18px;
+  padding-left: 247px;
+  position: relative;
   border: 1px solid #e0e0e0;
 }
 
@@ -140,12 +128,161 @@ export default {
 
 @media (min-width: 1250px) {
   .product {
-    height: 240px;
+    height: 305px;
   }
+}
+
+.product__header {
+  display: flex;
+  justify-content: space-between;
 }
 
 .product__code {
   font-size: 12px;
   color: #666;
 }
+
+.product__status {
+  cursor: pointer;
+  color: #093;
+  border-bottom: 1px dotted #093;
+  text-decoration: none;
+}
+
+.product__status:hover {
+  border-bottom-color: transparent;
+}
+
+.product__photo {
+  position: absolute;
+  left: 40px;
+}
+
+.product__link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.product__link:hover {
+  text-decoration: underline;
+}
+
+.product__photo img {
+  max-width: 160px;
+  max-height: 160px;
+  display: block;
+}
+
+.product__body {
+  display: flex;
+  padding-top: 8px;
+  justify-content: space-between;
+}
+
+.product__inner {
+  max-width: 505px;
+}
+
+.product__title {
+  margin: 0;
+  padding-right: 70px;
+  display: block;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 700;
+  color: #000;
+}
+
+.product__tags {
+  padding-top: 13px;
+}
+
+.product__price {
+  line-height: 18px;
+}
+
+.product__discount {
+  text-align: right;
+  margin-bottom: 6px;
+}
+
+.product__discount-text {
+  font-weight: 400;
+  font-size: 14px;
+  display: inline-block;
+  text-align: right;
+  line-height: 17px;
+  margin-right: 23px;
+}
+
+.product__discount-price {
+  font-size: 25px;
+  font-weight: 700;
+  color: #000;
+}
+
+.product__retail {
+  text-align: right;
+  margin-bottom: 8px;
+}
+
+.product__retail-price {
+  font-size: 25px;
+  color: #a7a7a7;
+}
+
+.product__price-points {
+  font-size: 12px;
+  line-height: 17px;
+  color: #999;
+  margin-bottom: 3px;
+}
+
+.product__points {
+  margin: 0;
+}
+
+.product__footer {
+  padding-top: 65px;
+}
+
+.product__footer-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.product__stepper {
+  margin-right: 6px;
+}
+
+.product__button {
+  min-width: 148px;
+  min-height: 40px;
+  border: none;
+  color: #fff;
+  background-color: #f90;
+  text-align: center;
+  position: relative;
+  padding: 0 0 0 15px;
+  cursor: pointer;
+}
+
+.product__button::after {
+  content: "";
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  margin-top: -10px;
+  background-image: url('../../assets/icon-card.svg');
+}
+
+.product__button-text {
+  font-size: 14px;
+  line-height: 40px;
+  text-transform: uppercase;
+}
+
 </style>

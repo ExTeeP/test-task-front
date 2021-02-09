@@ -16,5 +16,7 @@ export default {
 </script>
 
 <style>
-
+  .product__tooltip {
+    display: none;
+  }
 </style>
