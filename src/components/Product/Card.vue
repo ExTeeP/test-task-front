@@ -13,9 +13,7 @@
     <div class="product__body">
       <div class="product__inner">
         <h4 class="product__title">
-          <a href="#" class="product__link"
-            > {{ productItem.title }}</a
-          >
+          <a href="#" class="product__link">{{ productItem.title }}</a>
         </h4>
 
         <Tags class="product__tags"></Tags>
@@ -24,18 +22,21 @@
       <div class="product__price">
         <div class="product__discount">
           <span class="product__discount-text">По карте<br />клуба</span>
-          <span class="product__discount-price"> {{ priceAlt }} &#8381;</span>
+          <span class="product__discount-price">{{ isPackagePrice ? priceGold : priceGoldAlt }} &#8381;</span>
         </div>
 
         <div class="product__retail">
-          <span class="product__retail-price">391,09 &#8381;</span>
+          <span class="product__retail-price">{{ isPackagePrice ? priceRetail : priceRetailAlt }} &#8381;</span>
         </div>
 
         <div class="product__price-points">
           <p class="product__points">Можно купить за 231,75 балла</p>
         </div>
 
-        <Units class="product__units"></Units>
+        <Units class="product__units"
+          @unitPrice="onUnitEvent"
+          @packagePrice="onUnitEvent"
+        ></Units>
       </div>
     </div>
 
@@ -45,7 +46,7 @@
         <Stepper class="product__stepper">
         </Stepper>
 
-        <button class="product__button button" type="button">
+        <button class="product__button button" type="button" :data-product-id="this.productItem.productId">
           <span class="product__button-text">В корзину</span>
         </button>
       </div>
@@ -75,20 +76,40 @@ export default {
   },
   data () {
     return {
+      isPackagePrice: false,
     }
   },
   computed: {
-    priceAlt() {
-      return Number(this.productItem.priceGoldAlt.toFixed(2))
+    priceRetail() {
+      return Number(this.productItem.priceRetail);
+    },
+    priceGold() {
+      return Number(this.productItem.priceGold);
+    },
+    priceRetailAlt() {
+      return Number(this.productItem.priceRetailAlt.toFixed(2));
+    },
+    priceGoldAlt() {
+      return Number(this.productItem.priceGoldAlt.toFixed(2));
     },
     code() {
-      return Number(this.productItem.code)
+      return Number(this.productItem.code);
     },
     assocProducts() {
-      return this.productItem.assocProducts
+      return this.productItem.assocProducts;
     },
     imageUrl() {
       return this.productItem.primaryImageUrl.slice(0, -4) + SIZE_MODIFICATOR + this.productItem.primaryImageUrl.slice(-4);
+    },
+  },
+  methods: {
+
+    onUnitEvent(val) {
+      if (val === 'package') {
+        this.isPackagePrice = true;
+      } else {
+        this.isPackagePrice = false;
+      }
     }
   }
 };

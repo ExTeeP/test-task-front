@@ -1,11 +1,18 @@
 <template>
   <div class="stepper">
-    <Tooltip></Tooltip>
-
-    <input class="stepper__input" type="text" value="1">
+    <transition name="slide-fade">
+      <Tooltip v-if="toolipIsVisible"></Tooltip>
+    </transition>
+    <input class="stepper__input" type="number" min="1" max="150"
+      v-model="value"
+      @blur="defaultValue"
+      @keypress.enter="defaultValue"
+      @mouseover="showTooltip"
+      @mouseleave="hideTooltip"
+    >
     <div class="stepper__arrow-wrapper">
-      <button class="stepper__arrow stepper__arrow--up" type="button"></button>
-      <button class="stepper__arrow stepper__arrow--down" type="button"></button>
+      <button class="stepper__arrow stepper__arrow--up" @click="increaseValue" type="button"></button>
+      <button class="stepper__arrow stepper__arrow--down" @click="decreaseValue" type="button"></button>
     </div>
   </div>
 </template>
@@ -19,6 +26,30 @@ export default {
   components: {
     Tooltip,
   },
+  data() {
+    return {
+      value: 1,
+      toolipIsVisible: false,
+    };
+  },
+  methods: {
+    showTooltip() {
+      this.toolipIsVisible = true;
+    },
+    hideTooltip() {
+      this.toolipIsVisible = false;
+    },
+    increaseValue() {
+      this.value++;
+    },
+    decreaseValue() {
+      this.defaultValue()
+      this.value--
+    },
+    defaultValue() {
+      if (this.value <= 1 || this.value === '') this.value = 1;
+    }
+  }
 
 }
 </script>
@@ -74,5 +105,28 @@ export default {
 
 .stepper__arrow--down:hover {
   background-position: -1px -20px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+
+.slide-fade-leave-active {
+  transition: all .4s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+
+.slide-fade-enter, .slide-fade-leave-to {
+  transform: translateX(10px);
+  opacity: 0;
 }
 </style>

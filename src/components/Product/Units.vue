@@ -1,10 +1,14 @@
 <template>
   <div class="product-units">
     <div class="product-units__wrapper">
-      <button class="product-units__item product-units__item--active" type="button">
+      <button class="product-units__item" type="button"
+        @click="getUnitPrice"
+      >
         <span class="ng-binding">За м. кв.</span>
       </button>
-      <button class="product-units__item" type="button">
+      <button class="product-units__item" type="button"
+        @click="getPackagePrice"
+      >
         <span class="ng-binding">За упаковку</span>
       </button>
     </div>
@@ -15,16 +19,26 @@
 export default {
   name: "Units",
   props: {},
+  data() {
+    return {
+
+    };
+  },
+  methods: {
+    getUnitPrice() {
+      this.$emit('unitPrice', 'unit');
+    },
+    getPackagePrice() {
+      this.$emit('packagePrice', 'package');
+    },
+  },
+
 }
 </script>
 
 <style>
 .product-units {
   text-align: right;
-}
-
-.product-units__wrapper {
-
 }
 
 .product-units__item {
