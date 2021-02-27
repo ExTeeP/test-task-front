@@ -75,7 +75,6 @@ export default {
   },
   data () {
     return {
-      pro
     }
   },
   computed: {
