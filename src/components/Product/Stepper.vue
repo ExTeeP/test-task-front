@@ -1,5 +1,7 @@
 <template>
   <div class="stepper">
+    <Tooltip></Tooltip>
+
     <input class="stepper__input" type="text" value="1">
     <div class="stepper__arrow-wrapper">
       <button class="stepper__arrow stepper__arrow--up" type="button"></button>
@@ -9,7 +11,14 @@
 </template>
 
 <script>
+import Tooltip from "./Tooltip.vue";
+
 export default {
+  name: "Stepper",
+  props: {},
+  components: {
+    Tooltip,
+  },
 
 }
 </script>
@@ -17,6 +26,7 @@ export default {
 <style>
 .stepper {
   display: flex;
+  position: relative;
 }
 
 .stepper__input {

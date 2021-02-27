@@ -15,6 +15,7 @@ export default {
     Products,
   },
 };
+
 </script>
 
 <style>

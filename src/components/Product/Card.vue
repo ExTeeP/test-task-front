@@ -1,11 +1,11 @@
 <template>
   <div class="product">
     <header class="product__header">
-      <span class="product__code">Код: 147268</span>
+      <span class="product__code">Код: {{ code }}</span>
       <span class="product__status">Наличие</span>
       <div class="product__photo">
         <a href="#" class="product__link">
-          <img src="@/assets/df126-52f2-11e5-b9a9-00259036a192_220x220_1.jpg">
+          <img :src="imageUrl">
         </a>
       </div>
     </header>
@@ -14,7 +14,7 @@
       <div class="product__inner">
         <h4 class="product__title">
           <a href="#" class="product__link"
-            >Ламинат 31 кл Kronospan Kronofix Афцелия Малайская 2,47 м.кв. 7 мм</a
+            > {{ productItem.title }}</a
           >
         </h4>
 
@@ -24,49 +24,11 @@
       <div class="product__price">
         <div class="product__discount">
           <span class="product__discount-text">По карте<br />клуба</span>
-          <span class="product__discount-price">375,71 &#8381;</span>
-          <!-- <span class="rouble__i black__i">
-            <svg
-              version="1.0"
-              id="rouble__b"
-              xmlns="http://www.w3.org/2000/svg"
-              x="0"
-              y="0"
-              width="30px"
-              height="22px"
-              viewBox="0 0 50 50"
-              enable-background="new 0 0 50 50"
-              xml:space="preserve"
-            >
-              <use
-                xmlns:xlink="http://www.w3.org/1999/xlink"
-                xlink:href="#rouble_black"
-              ></use>
-            </svg>
-          </span> -->
+          <span class="product__discount-price"> {{ priceAlt }} &#8381;</span>
         </div>
 
         <div class="product__retail">
           <span class="product__retail-price">391,09 &#8381;</span>
-          <!-- <span class="rouble__i black__i">
-            <svg
-              version="1.0"
-              id="rouble__g"
-              xmlns="http://www.w3.org/2000/svg"
-              x="0"
-              y="0"
-              width="30px"
-              height="22px"
-              viewBox="0 0 50 50"
-              enable-background="new 0 0 50 50"
-              xml:space="preserve"
-            >
-              <use
-                xmlns:xlink="http://www.w3.org/1999/xlink"
-                xlink:href="#rouble_gray"
-              ></use>
-            </svg>
-          </span> -->
         </div>
 
         <div class="product__price-points">
@@ -78,10 +40,10 @@
     </div>
 
     <footer class="product__footer">
-      <Tooltip></Tooltip>
 
       <div class="product__footer-wrapper">
-        <Stepper class="product__stepper"></Stepper>
+        <Stepper class="product__stepper">
+        </Stepper>
 
         <button class="product__button button" type="button">
           <span class="product__button-text">В корзину</span>
@@ -94,18 +56,42 @@
 <script>
 import Tags from "./Tags.vue";
 import Units from "./Units.vue";
-import Tooltip from "./Tooltip.vue";
 import Stepper from "./Stepper.vue";
+
+const SIZE_MODIFICATOR = '_220x220_1';
 
 export default {
   name: "Card",
-  props: {},
+  props: {
+    productItem: {
+      type: Object,
+      required: true,
+    }
+  },
   components: {
     Tags,
     Units,
-    Tooltip,
     Stepper,
   },
+  data () {
+    return {
+      pro
+    }
+  },
+  computed: {
+    priceAlt() {
+      return Number(this.productItem.priceGoldAlt.toFixed(2))
+    },
+    code() {
+      return Number(this.productItem.code)
+    },
+    assocProducts() {
+      return this.productItem.assocProducts
+    },
+    imageUrl() {
+      return this.productItem.primaryImageUrl.slice(0, -4) + SIZE_MODIFICATOR + this.productItem.primaryImageUrl.slice(-4);
+    }
+  }
 };
 </script>
 

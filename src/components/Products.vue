@@ -1,8 +1,11 @@
 <template>
   <section class="products">
     <ul class="products__list">
-      <li class="products__item">
-        <Card></Card>
+      <li class="products__item"
+        v-for="productItem in productsList"
+        :key="productItem.productId"
+      >
+        <Card :productItem="productItem"></Card>
       </li>
     </ul>
   </section>
@@ -10,17 +13,21 @@
 
 <script>
 import Card from './Product/Card.vue';
+import ProductsData from "../../db/products.json";
 
 export default {
   name: "Products",
-  props: {},
   components: {
     Card
+  },
+  data () {
+    return {
+      productsList: ProductsData,
+    }
   }
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 
 .products {}
@@ -57,7 +64,7 @@ export default {
 
 @media (min-width: 1250px) {
   .products__item {
-    height: 240px;
+    height: 305px;
   }
 }
 
